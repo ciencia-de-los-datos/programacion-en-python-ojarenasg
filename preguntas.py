@@ -302,6 +302,7 @@ def pregunta_09():
             counter[key] = value
     temp = [(key, counter[key]) for key in counter]
     aws = dict(sorted(temp, key=itemgetter(0)))
+    return aws
 
 
 def pregunta_10():
