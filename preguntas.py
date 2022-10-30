@@ -12,17 +12,29 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+def open_file():
+    list=[]
+    with fileinput.input('data.csv') as file:
+        for line in file:
+            line = line.replace('\n','')
+            row = line.split(sep='\t')
+            list.append(row)
+    return list
+
 
 def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
+     BD = open_file()
+     num = [int(rows[1]) for rows in BD]
+     return sum(num)
+      
+"""
+       Retorne la suma de la segunda columna.
 
     Rta/
     214
 
     """
-    return 666
-
+     
 
 def pregunta_02():
     """
