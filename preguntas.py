@@ -11,14 +11,26 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import fileinput
+from operator import itemgetter
+
+
+def open_file():
+    list=[]
+    with fileinput.input('data.csv') as file:
+        for line in file:
+            line = line.replace('\n','')
+            row = line.split(sep='\t')
+            list.append(row)
+    return list
 
 
 
 
 def pregunta_01():
-     
-     
-     return sum([int(rows[1]) for rows in BD])
+    BD = open_file()
+    num = [int(rows[1]) for rows in BD]
+    return sum(num)
       
 """
        Retorne la suma de la segunda columna.
