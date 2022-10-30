@@ -12,14 +12,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
-def open_file():
-    list=[]
-    with fileinput.input('data.csv') as file:
-        for line in file:
-            line = line.replace('\n','')
-            row = line.split(sep='\t')
-            list.append(row)
-    return list
+
 
 
 def pregunta_01():
