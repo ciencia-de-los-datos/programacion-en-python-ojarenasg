@@ -23,7 +23,7 @@ def open_file():
 
 
 def pregunta_01():
-     BD = open_file()
+     
      num = [int(rows[1]) for rows in BD]
      return sum(num)
       
