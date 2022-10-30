@@ -42,6 +42,17 @@ def pregunta_01():
      
 
 def pregunta_02():
+    counter = {}
+    BD = open_file()
+    list_tupla = [(letter[0], 1) for letter in BD]
+    for key, value in list_tupla:
+        if key in counter:
+            counter[key] += value
+        else:
+            counter[key] = value
+
+    temp = [(key, counter[key]) for key in counter]
+    return sorted(temp, key=itemgetter(0))
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
     de tuplas (letra, cantidad), ordendas alfabéticamente.
@@ -56,10 +67,22 @@ def pregunta_02():
     ]
 
     """
-    return 99
+
 
 
 def pregunta_03():
+    counter = {}
+    BD = open_file()
+    list_tupla = [(var[0], int(var[1])) for var in BD]
+    for key, value in list_tupla:
+        if key in counter:
+            counter[key] += value
+        else:
+            counter[key] = value
+
+    temp = [(key, counter[key]) for key in counter]
+    return sorted(temp, key=itemgetter(0)) 
+
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
     de tuplas (letra, suma) ordendas alfabeticamente.
@@ -74,7 +97,7 @@ def pregunta_03():
     ]
 
     """
-    return 666
+    
 
 
 def pregunta_04():
@@ -99,7 +122,20 @@ def pregunta_04():
     ]
 
     """
-    return 666
+    counter = {}
+    BD = open_file()
+    list_date = [date[2] for date in BD]
+    date_uniq = [d.split('-') for d in list_date]
+    months = [(dat[1], 1) for dat in date_uniq]
+
+    for key, value in months:
+        if key in counter:
+            counter[key] += value
+        else:
+            counter[key] = value
+
+    temp = [(key, counter[key]) for key in counter]
+    return sorted(temp, key=itemgetter(0))
 
 
 def pregunta_05():
@@ -117,7 +153,12 @@ def pregunta_05():
     ]
 
     """
-    return 666
+    BD = open_file()
+    list_tupla = [(var[0], int(var[1])) for var in BD]
+
+    conteo =[(key, max([y for (x,y) in list_tupla if x == key]), min([y for (x,y) in list_tupla if x == key])) for key in dict(list_tupla).keys()]
+    conteo.sort()
+    return conteo
 
 
 def pregunta_06():
@@ -142,7 +183,18 @@ def pregunta_06():
     ]
 
     """
-    return
+    BD = open_file()
+    col = [var[4] for var in BD]
+    col = [lin.split(',') for lin in col]
+    val=[]
+    for line in col:
+        val += [item.split(sep=':') for item in line]
+
+    list_tupla = [(var[0], int(var[1])) for var in val]
+    conteo =[(key, min([y for (x,y) in list_tupla if x == key]), max([y for (x,y) in list_tupla if x == key])) for key in dict(list_tupla).keys()]
+    conteo.sort()
+    
+    return conteo
 
 
 def pregunta_07():
@@ -166,7 +218,18 @@ def pregunta_07():
     ]
 
     """
-    return 666
+    BD = open_file()
+    list_tupla = [(var[0], int(var[1])) for var in BD]
+ 
+    counter = {}
+    for row in list_tupla:
+        val = int(row[1])
+        if val in counter.keys():
+            counter[val].append(row[0])
+        else:
+            counter[val] = [row[0]]
+    temp = [(rows[0], list(rows[1])) for rows in counter.items()]
+    return sorted(temp, key=itemgetter(0))
 
 
 def pregunta_08():
@@ -191,7 +254,17 @@ def pregunta_08():
     ]
 
     """
-    return 666
+    BD = open_file()
+    list_tupla = [(var[0], int(var[1])) for var in BD]
+ 
+    counter = {}
+    for row in list_tupla:
+        val = int(row[1])
+        if val in counter.keys():
+            counter[val].append(row[0])
+        else:
+            counter[val] = [row[0]]
+    return [(r[0], sorted(list(set(r[1])))) for r in sorted(counter.items())]
 
 
 def pregunta_09():
@@ -214,7 +287,21 @@ def pregunta_09():
     }
 
     """
-    return 666
+    BD = open_file()
+    col = [var[4] for var in BD]
+    col = [lin.split(',') for lin in col]
+    val=[]
+    for line in col:
+        val += [item.split(sep=':') for item in line]
+    unit = [(dat[0], 1) for dat in val]
+    counter = {}
+    for key, value in unit:
+        if key in counter:
+            counter[key] += value
+        else:
+            counter[key] = value
+    temp = [(key, counter[key]) for key in counter]
+    aws = dict(sorted(temp, key=itemgetter(0)))
 
 
 def pregunta_10():
@@ -235,7 +322,12 @@ def pregunta_10():
 
 
     """
-    return 666
+    BD = open_file()
+
+    counter = []
+    for row in BD:
+        counter.append((row[0], len(row[3].split(',')), len(row[4].split(','))))
+    return counter
 
 
 def pregunta_11():
@@ -256,7 +348,17 @@ def pregunta_11():
 
 
     """
-    return 666
+    BD = open_file()
+    counter = {}
+    for row in BD:
+        val = int(row[1])
+        lett = row[3].split(',')
+        for char in lett:
+            if char in counter.keys():
+                counter[char] += val
+            else:
+                counter[char] = val
+    return  dict(sorted(counter.items()))
 
 
 def pregunta_12():
@@ -274,4 +376,13 @@ def pregunta_12():
     }
 
     """
-    return 666
+    BD = open_file()
+    counter = {}
+    for row in BD:
+        if row[0] not in counter.keys():
+            counter[row[0]] = 0
+        pairs = row[4].replace(':', ',').split(',')
+        for pair in pairs:
+            if pair.isdigit():
+                counter[row[0]] += int(pair)
+    return dict(sorted(counter.items()))
