@@ -17,8 +17,8 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 def pregunta_01():
      
-     num = [int(rows[1]) for rows in BD]
-     return sum(num)
+     
+     return sum([int(rows[1]) for rows in BD])
       
 """
        Retorne la suma de la segunda columna.
